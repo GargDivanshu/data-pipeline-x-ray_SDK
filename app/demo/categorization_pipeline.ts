@@ -45,6 +45,10 @@ async function main() {
             ctx.addMetric("candidates_out", filtered.length);
             ctx.addMetric("drop_ratio", (totalCategories - filtered.length) / totalCategories);
 
+            ctx.addMetric("drop_ratio", (totalCategories - filtered.length) / totalCategories);
+
+            ctx.setExplanation("Filtered categories based on confidence threshold > 0.5");
+
             return filtered;
         });
 

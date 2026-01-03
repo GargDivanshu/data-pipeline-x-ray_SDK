@@ -1,8 +1,10 @@
+// packages/xray-sdk/step.ts
 import { StepType, StepMetrics, Json, ArtifactRef } from "../xray-core/types";
 import { XRayRun } from "./run";
 
 export class StepContext {
     public metrics: StepMetrics = {};
+    public explanation?: string;
 
     constructor(
         private run: XRayRun,
@@ -12,6 +14,10 @@ export class StepContext {
     addMetric(key: keyof StepMetrics, value: number | string) {
         // @ts-ignore
         this.metrics[key] = value;
+    }
+
+    setExplanation(text: string) {
+        this.explanation = text;
     }
 }
 
@@ -53,7 +59,8 @@ export async function executeStep<T>(
             seq,
             payload: {
                 output: result as unknown as Json,
-                metrics: ctx.metrics
+                metrics: ctx.metrics,
+                why: ctx.explanation
             },
             ts: new Date().toISOString()
         });

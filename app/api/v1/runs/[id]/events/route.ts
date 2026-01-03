@@ -65,7 +65,8 @@ export async function POST(
                         endTime,
                         JSON.stringify(payload.output || {}),
                         JSON.stringify(payload.metrics || {}), // Metrics persistence
-                        payload.why || null,
+                        // GUARDRAIL: Truncate explanation to sensible length (2KB)
+                        payload.why ? payload.why.substring(0, 2048) : null,
                         runId,
                         seq
                     ]

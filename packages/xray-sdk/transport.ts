@@ -1,3 +1,4 @@
+// packages/xray-sdk/transport.ts
 import { XRayEvent } from "../xray-core/types";
 
 export interface Transport {

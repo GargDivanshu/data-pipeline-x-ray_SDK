@@ -39,6 +39,12 @@ async function main() {
             ctx.addMetric("candidates_out", out.length);
             ctx.addMetric("drop_ratio", (candidates.length - out.length) / candidates.length);
 
+            ctx.addMetric("drop_ratio", (candidates.length - out.length) / candidates.length);
+
+            // Explanation
+            const dropPct = Math.round(((candidates.length - out.length) / candidates.length) * 100);
+            ctx.setExplanation(`Dropped ${dropPct}% of candidates because relevance <= 0.5`);
+
             return out;
         });
 

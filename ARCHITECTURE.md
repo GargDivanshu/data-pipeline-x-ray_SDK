@@ -8,6 +8,18 @@ The X-Ray system is built around three core concepts designed to make pipelines 
 2.  **Step**: A discrete business logic unit (LLM, Filter, Rank) that emitted a decision.
 3.  **Artifact**: Bulky evidence (full HTML, large JSON) referenced by steps but stored separately.
 
+### Step-Level Reasoning
+
+Each decision step may emit a concise, human-readable explanation describing *why* the step produced its outcome (e.g., “Dropped 92% of candidates due to relevance threshold”).
+
+This explanation is intentionally:
+- post-hoc (not model chain-of-thought)
+- compact
+- human-debuggable
+- safe to persist
+
+Explanations complement structured metrics: metrics enable system-wide queries, while explanations provide local context during deep dives. Large or sensitive payloads are intentionally excluded and would be stored as external artifacts in a future iteration.
+
 ## Storage Philosophy: Hot vs. Cold
 
 We explicitly split storage to maintain query performance and manage costs.

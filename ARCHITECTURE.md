@@ -27,7 +27,7 @@ We explicitly split storage to maintain query performance and manage costs.
 ### Hot Storage (Postgres)
 - **Content**: Runs, Steps, Metrics, structured Inputs/Outputs, "Why" explanations.
 - **Goal**: Instant querying and filtering.
-- **Killer Query**:
+- **Inspection Query**:
   ```sql
   SELECT run_id, step_name, candidates_in, candidates_out, drop_ratio
   FROM xray_steps
